@@ -6,6 +6,11 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface SysUserMapper {
 
-    SysUser selectByUserName(String userName);
+    /**
+     * 根据用户名查询用户数据
+     * @param userName
+     * @return
+     */
+    public abstract SysUser selectByUserName(String userName) ;
 
 }

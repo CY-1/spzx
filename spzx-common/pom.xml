@@ -8,8 +8,11 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
     <artifactId>spzx-common</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <groupId>com.atguigu</groupId>
+
+
     <packaging>pom</packaging>
     <modules>
         <module>common-util</module>
@@ -26,5 +29,19 @@
             <artifactId>hutool-all</artifactId>
             <version>5.5.2</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.atguigu</groupId>
+            <artifactId>spzx-model</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+
+
     </dependencies>
 </project>

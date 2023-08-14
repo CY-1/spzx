@@ -33,7 +33,7 @@ public class Result<T> {
                 .data(data);
     }
     //使用枚举类对象创建Result的方法
-    public static <T> Result<T> build(ResultCodeEnum codeEnum , T data){
+    public static <T> Result<T> build( T data,ResultCodeEnum codeEnum ){
         return build(codeEnum.getCode() , codeEnum.getMessage() , data);
     }
 

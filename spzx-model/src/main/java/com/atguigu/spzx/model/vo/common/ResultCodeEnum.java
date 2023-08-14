@@ -11,7 +11,9 @@ public enum ResultCodeEnum {
     //创建枚举类实例
     SUCCESS(200 , "成功"),
     LOGIN_ERROR(201 , "账号或密码错误"),
-    UNKNOW_ERROR(-1 , "服务器内部错误");
+    UNKNOW_ERROR(-1 , "服务器内部错误"),
+    SYSTEM_ERROR(9999 , "您的网络有问题请稍后重试"),
+    VALIDATECODE_ERROR(203, "验证码错误");
 
     private Integer code;
     private String message;
