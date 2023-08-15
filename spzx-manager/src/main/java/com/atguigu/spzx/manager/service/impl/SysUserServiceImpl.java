@@ -33,13 +33,15 @@ public class SysUserServiceImpl implements SysUserService {
         String captcha =loginDto.getCaptcha();
         String codeKey= loginDto.getCodeKey();
         String redisCode = redisTemplate.opsForValue().get("user:login:validatecode:" + codeKey);
+
         if(StrUtil.isEmpty(redisCode) || !StrUtil.equalsIgnoreCase(redisCode , captcha)) {
             throw new GuiguException(ResultCodeEnum.VALIDATECODE_ERROR) ;
         }
+
         // 根据用户名查询用户
         SysUser sysUser = sysUserMapper.selectByUserName(loginDto.getUserName());
         if(sysUser == null) {
-            throw new RuntimeException("用户名或者密码错误") ;
+            throw new GuiguException(ResultCodeEnum.LOGIN_ERROR);
         }
 
         // 验证密码是否正确
@@ -57,7 +59,8 @@ public class SysUserServiceImpl implements SysUserService {
         LoginVo loginVo = new LoginVo() ;
         loginVo.setToken(token);
         loginVo.setRefresh_token("");
-
+        //验证通过后删除
+        redisTemplate.delete("user:login:validatecode:" + codeKey);
         // 返回
         return loginVo;
     }

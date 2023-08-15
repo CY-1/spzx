@@ -17,7 +17,16 @@ spring:
       host: 192.168.160.130
       port: 6379
       password: 1234
-
+spzx:
+  auth:
+    noAuthUrls:
+      - /admin/system/index/login
+      - /admin/system/index/generateValidateCode
+      - /doc.html
+      - /webjars/css/**
+      - /webjars/js/**
+      - /v3/api-docs/**
+      - /favicon.ico
 # mybatis的配置
 mybatis:
   config-location: classpath:/mybatis-config.xml
