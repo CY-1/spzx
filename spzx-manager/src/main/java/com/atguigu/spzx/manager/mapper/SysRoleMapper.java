@@ -24,4 +24,6 @@ public interface SysRoleMapper {
     List<SysRole> finAllRoles(Long userId);
 
     void addUserRole(AddUserRoleDto data);
+
+    void deleteUserRole(Long userId);
 }

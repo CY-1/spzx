@@ -57,6 +57,7 @@ public class SysRoleServiceImpl implements SysRoleService {
 
     @Override
     public void addUserRole(AddUserRoleDto data) {
+        sysRoleMapper.deleteUserRole(data.getUserId());
         sysRoleMapper.addUserRole(data);
     }
 }
