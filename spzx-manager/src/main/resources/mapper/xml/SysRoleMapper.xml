@@ -11,6 +11,13 @@
         insert into sys_role ( id, role_name, role_code, description )
         values ( #{id}, #{roleName}, #{roleCode}, #{description} )
     </insert>
+    <insert id="addUserRole">
+        insert into sys_user_role (role_id,user_id)
+        values
+        <foreach collection="roleIdList" item="roleId" separator="," >
+        (#{roleId},#{userId})
+        </foreach>
+    </insert>
     <update id="updateSysRole">
         update sys_role set
         <if test="roleName != null and roleName != ''">
@@ -38,5 +45,14 @@
             </if>
             and is_deleted = 0
         </where>
+    </select>
+    <select id="getAll" resultType="com.atguigu.spzx.model.entity.system.SysRole">
+        select id,role_name from sys_role
+    </select>
+    <select id="finAllRoles" resultType="com.atguigu.spzx.model.entity.system.SysRole">
+        select role_id as id, role_name from sys_user
+        left join  sys_user_role on sys_user.id=sys_user_role.user_id
+        left join sys_role on sys_role.id=role_id
+        where sys_user_role.user_id=#{userId}
     </select>
 </mapper>

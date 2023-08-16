@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.UUID;
 
 @Service
 public class FileUploadServiceImpl implements FileUploadService {
@@ -21,16 +22,17 @@ public class FileUploadServiceImpl implements FileUploadService {
     @Override
     public String fileUpload(MultipartFile multipartFile) {
         try {
+            String s = UUID.randomUUID().toString();
             InputStream is = multipartFile.getInputStream();
             PutObjectArgs putObjectArgs = PutObjectArgs.builder()
                     .bucket("spzx-bucket")
                     .stream(is, is.available(), -1)
-                    .object(AuthContextUtil.get().getId().toString()+".jpg")
+                    .object(s+".jpg")
                     .build();
             minioClient.putObject(putObjectArgs) ;
 
             // 构建fileUrl
-            String fileUrl = "http://192.168.160.130:9001/spzx-bucket/"+AuthContextUtil.get().getId().toString()+".jpg" ;
+            String fileUrl = "http://192.168.160.130:9001/spzx-bucket/"+s+".jpg" ;
             return fileUrl;
         } catch (IOException e) {
             throw new RuntimeException(e);

@@ -35,7 +35,7 @@
     <insert id="saveSysUser">
         insert into  sys_user(    id, username, `password` , `name` , phone ,avatar , description , `status` , create_time , update_time , is_deleted)
 values (
-           #{id}, #{userName}, #{password} , #{name} , #{phone} , #{avatar} , #{description} , #{status} , NOW() , NOW() , 0
+           #{id}, #{userName}, MD5(#{password}) , #{name} , #{phone} , #{avatar} , #{description} , #{status} , NOW() , NOW() , 0
        )
 
     </insert>
