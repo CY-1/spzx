@@ -19,7 +19,8 @@ public class AuthContextUtil {
 
     // 删除数据的方法
     public static void remove() {
-        threadLocal.remove();
+
+//        threadLocal.remove();
     }
 
 }

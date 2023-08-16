@@ -27,6 +27,12 @@ spzx:
       - /webjars/js/**
       - /v3/api-docs/**
       - /favicon.ico
+  minio:
+    endpointUrl: http://192.168.160.130:9001
+    accessKey: admin
+    secreKey: admin123456
+    bucketName: sph
+
 # mybatis的配置
 mybatis:
   config-location: classpath:/mybatis-config.xml

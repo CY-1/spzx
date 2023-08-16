@@ -7,14 +7,18 @@ import com.atguigu.spzx.common.exception.GuiguException;
 import com.atguigu.spzx.manager.mapper.SysUserMapper;
 import com.atguigu.spzx.manager.service.SysUserService;
 import com.atguigu.spzx.model.dto.system.LoginDto;
+import com.atguigu.spzx.model.dto.system.SysUserDto;
 import com.atguigu.spzx.model.entity.system.SysUser;
 import com.atguigu.spzx.model.vo.common.ResultCodeEnum;
 import com.atguigu.spzx.model.vo.system.LoginVo;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
+import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
@@ -71,10 +75,37 @@ public class SysUserServiceImpl implements SysUserService {
             String userJson = redisTemplate.opsForValue().get("user:login:" + token);
             return JSON.parseObject(userJson , SysUser.class) ;
         }
-
     @Override
     public void logout(String token) {
         redisTemplate.delete("user:login:" + token) ;
+    }
+
+
+    //增删查改
+    @Override
+    public PageInfo<SysUser> findByPage(SysUserDto sysUserDto, Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<SysUser> users= sysUserMapper.findByPage(sysUserDto);
+        PageInfo<SysUser> sysUserPageInfo = new PageInfo<>(users);
+        return sysUserPageInfo;
+    }
+
+    @Override
+    public void saveSysUser(SysUser sysUser) {
+        sysUserMapper.saveSysUser(sysUser);
+    }
+
+    @Override
+    public void updateSysUser(SysUser sysUser) {
+        sysUserMapper.updateSysUser(sysUser);
+    }
+
+    @Override
+    public void deleteSysUser(Long id) {
+        int i = sysUserMapper.deleteSysUser(id);
+        if(i==0){
+            throw new GuiguException(ResultCodeEnum.DELETE_ERROR);
+        }
     }
 
 

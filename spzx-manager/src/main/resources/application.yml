@@ -4,3 +4,6 @@ spring:
     name: service-manager
   profiles:
     active: dev		# 激活的环境文件
+  jackson:
+    date-format: yyyy-MM-dd
+    time-zone: GMT+8

@@ -5,7 +5,7 @@ import com.atguigu.spzx.model.vo.system.SysRoleDto;
 import com.github.pagehelper.PageInfo;
 
 public interface SysRoleService {
-    public abstract PageInfo<SysRole> findByPage(SysRoleDto sysRoleDto, Integer pageNum, Integer pageSize);
+    PageInfo<SysRole> findByPage(SysRoleDto sysRoleDto, Integer pageNum, Integer pageSize);
 
     void saveSysRole(SysRole sysRole);
 
