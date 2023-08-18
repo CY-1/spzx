@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atguigu.spzx.manager.mapper.SysMenuMapper">
+
+    <resultMap id="sysMenuMap" type="com.atguigu.spzx.model.entity.system.SysMenu" autoMapping="true"></resultMap>
+    <sql id="columns">
+        id,parent_id,title,component,sort_value,status,create_time,update_time,is_deleted
+    </sql>
+    <insert id="save">
+        insert into sys_menu(title, component, sort_value, status,parent_id)
+values(#{title},#{component},#{sortValue},#{status},#{parentId})
+    </insert>
+    <update id="removeById">
+        update sys_menu set is_deleted=1 where id=#{id}
+    </update>
+    <update id="updateNode">
+        update sys_menu set
+                            update_time=NOW()
+                        <if test="title!=null and title!=''">
+                            ,title=#{title}
+                        </if>
+        <if test="component!=null and component!=''">
+            ,component=#{component}
+        </if>
+        <if test="sortValue!=null">
+            ,sort_value=#{sortValue}
+        </if>
+        <if test="status!=null">
+            ,status=#{status}
+        </if>
+                            where id=#{id}
+    </update>
+    <select id="selectAll" resultMap="sysMenuMap">
+        select <include refid="columns" />
+        from sys_menu
+        where
+        is_deleted = 0
+        order by sort_value
+    </select>
+    <select id="countByParentId" resultType="java.lang.Integer">
+        select count(*) from sys_menu where is_deleted = 0 and parent_id = #{id}
+    </select>
+    <select id="getById" resultType="com.atguigu.spzx.model.entity.system.SysMenu">
+        select <include refid="columns" /> from sys_menu where is_deleted = 0 and id = #{id}
+    </select>
+    <select id="selectListByUserId" resultType="com.atguigu.spzx.model.entity.system.SysMenu">
+        select title,component,id,parent_id from sys_menu where is_deleted = 0 and
+        id in (select menu_id from sys_role_menu where role_id=(select role_id from sys_user_role where user_id=#{id}))
+    </select>
+</mapper>

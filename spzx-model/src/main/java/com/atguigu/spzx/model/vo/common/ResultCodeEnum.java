@@ -14,7 +14,8 @@ public enum ResultCodeEnum {
     UNKNOW_ERROR(-1 , "服务器内部错误"),
     SYSTEM_ERROR(9999 , "您的网络有问题请稍后重试"),
     VALIDATECODE_ERROR(203, "验证码错误"), LOGIN_AUTH(208, "无登录信息"),
-    DELETE_ERROR(209,"删除失败");
+    DELETE_ERROR(209,"删除失败"),
+    NODE_ERROR(210, "还有子节点");
     private Integer code;
     private String message;
     private ResultCodeEnum(Integer code,
