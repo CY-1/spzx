@@ -18,8 +18,12 @@ public class FileUploadController {
     private FileUploadService fileUploadService ;
 
     @PostMapping(value = "/fileUpload")
-    public Result<String> fileUploadService(@RequestParam(value = "file") MultipartFile multipartFile) {
-        String fileUrl = fileUploadService.fileUpload(multipartFile) ;
+    public Result<String> fileUploadService(
+            @RequestParam(value = "file") MultipartFile multipartFile,
+            String module
+    ) {
+        System.out.println(module);
+        String fileUrl = fileUploadService.fileUpload(multipartFile,module) ;
         return Result.build(fileUrl , ResultCodeEnum.SUCCESS) ;
     }
 

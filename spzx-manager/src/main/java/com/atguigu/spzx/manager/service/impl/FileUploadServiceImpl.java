@@ -1,6 +1,5 @@
 package com.atguigu.spzx.manager.service.impl;
 
-import com.atguigu.model.entity.system.SysUser.AuthContextUtil;
 import com.atguigu.spzx.manager.service.FileUploadService;
 import io.minio.MinioClient;
 import io.minio.PutObjectArgs;
@@ -20,19 +19,19 @@ public class FileUploadServiceImpl implements FileUploadService {
     @Autowired
     MinioClient minioClient;
     @Override
-    public String fileUpload(MultipartFile multipartFile) {
+    public String fileUpload(MultipartFile multipartFile, String module) {
         try {
             String s = UUID.randomUUID().toString();
             InputStream is = multipartFile.getInputStream();
             PutObjectArgs putObjectArgs = PutObjectArgs.builder()
                     .bucket("spzx-bucket")
                     .stream(is, is.available(), -1)
-                    .object(s+".jpg")
+                    .object("module/"+s+".jpg")
                     .build();
             minioClient.putObject(putObjectArgs) ;
 
             // 构建fileUrl
-            String fileUrl = "http://192.168.160.130:9001/spzx-bucket/"+s+".jpg" ;
+            String fileUrl = "http://192.168.160.130:9001/spzx-bucket/"+"module/"+s+".jpg";
             return fileUrl;
         } catch (IOException e) {
             throw new RuntimeException(e);

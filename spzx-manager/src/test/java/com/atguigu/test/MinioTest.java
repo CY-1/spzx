@@ -41,4 +41,9 @@ public class MinioTest {
         String fileUrl = "http://192.168.160.130:9001/spzx-bucket/1.jpg" ;
         System.out.println(fileUrl);
     }
+    @Test
+    public void test2(){
+        Long id=1L;
+        System.out.println(id==2);
+    }
 }
