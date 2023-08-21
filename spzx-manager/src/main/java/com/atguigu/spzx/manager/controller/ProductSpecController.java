@@ -6,10 +6,9 @@ import com.atguigu.spzx.model.vo.common.Result;
 import com.atguigu.spzx.model.vo.common.ResultCodeEnum;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(value="/admin/product/productSpec")
@@ -23,5 +22,30 @@ public class ProductSpecController {
         PageInfo<ProductSpec> pageInfo = productSpecService.findByPage(page, limit);
         return Result.build(pageInfo , ResultCodeEnum.SUCCESS) ;
     }
+    @PostMapping("save")
+    public Result<PageInfo<ProductSpec>> save(@RequestBody ProductSpec productSpec) {
+        productSpecService.save(productSpec);
+        return Result.build(null, ResultCodeEnum.SUCCESS);
+    }
+    @DeleteMapping("/delete/{id}")
+    public Result delete(@PathVariable String id){
+        productSpecService.delete(id);
+        return Result.build(null, ResultCodeEnum.SUCCESS);
+    }
 
+    @GetMapping("/getProductSpec/{id}")
+    public Result<ProductSpec> findByPage(@PathVariable String id) {
+        ProductSpec result = productSpecService.getById(id);
+        return Result.build(result , ResultCodeEnum.SUCCESS) ;
+    }
+    @PutMapping("/update")
+    public Result update(@RequestBody ProductSpec productSpec ){
+        productSpecService.update(productSpec);
+        return Result.build(null , ResultCodeEnum.SUCCESS) ;
+    }
+    @GetMapping("/findAll")
+    public Result findAll() {
+        List<ProductSpec> list = productSpecService.findAll();
+        return Result.build(list , ResultCodeEnum.SUCCESS) ;
+    }
 }

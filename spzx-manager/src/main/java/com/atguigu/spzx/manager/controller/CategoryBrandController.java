@@ -5,9 +5,12 @@ import com.atguigu.spzx.model.dto.system.CategoryBrandDto;
 import com.atguigu.spzx.model.entity.product.CategoryBrand;
 import com.atguigu.spzx.model.vo.common.Result;
 import com.atguigu.spzx.model.vo.common.ResultCodeEnum;
+import com.atguigu.spzx.model.vo.product.Brand;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/admin/product/categoryBrand")
@@ -35,5 +38,10 @@ public class CategoryBrandController {
     public Result DeleteBrandCategory(@PathVariable Long id){
         categoryBrandService.deleteBrandCategory(id);
         return Result.build(null, ResultCodeEnum.SUCCESS);
+    }
+    @GetMapping("/findBrandByCategoryId/{categoryId}")
+    public Result findBrandByCategoryId(@PathVariable Long categoryId) {
+        List<Brand> brandList =   categoryBrandService.findBrandByCategoryId(categoryId);
+        return Result.build(brandList , ResultCodeEnum.SUCCESS) ;
     }
 }

@@ -11,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 import java.io.IOException;
 import java.security.InvalidKeyException;
@@ -20,6 +21,7 @@ import java.security.NoSuchAlgorithmException;
 @SpringBootApplication
 @EnableConfigurationProperties
 @EnableKnife4j
+@EnableScheduling
 public class ManagerApplication {
 
     public static void main(String[] args) {

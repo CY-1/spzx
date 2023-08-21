@@ -42,4 +42,8 @@
             and brand.is_deleted=0
         </where>
     </select>
+    <select id="findBrandByCategoryId" resultType="com.atguigu.spzx.model.vo.product.Brand">
+        select brand.* from category_brand  right join brand on brand.id=category_brand.brand_id
+        where category_brand.category_id=#{id} and category_brand.is_deleted=0 and brand.is_deleted=0
+    </select>
 </mapper>
