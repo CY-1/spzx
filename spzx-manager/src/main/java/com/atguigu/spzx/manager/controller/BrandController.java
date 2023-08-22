@@ -1,5 +1,6 @@
 package com.atguigu.spzx.manager.controller;
 
+import com.atguigu.spzx.common.log.annotation.Log;
 import com.atguigu.spzx.manager.service.BrandService;
 import com.atguigu.spzx.model.vo.common.Result;
 import com.atguigu.spzx.model.vo.common.ResultCodeEnum;
@@ -16,7 +17,7 @@ public class BrandController {
 
     @Autowired
     private BrandService brandService ;
-
+    @Log(title = "brand page search", businessType = 0)
     @GetMapping("/{page}/{limit}")
     public Result<PageInfo<Brand>> findByPage(@PathVariable Integer page, @PathVariable Integer limit) {
         PageInfo<Brand> pageInfo = brandService.findByPage(page, limit);

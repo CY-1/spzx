@@ -1,6 +1,7 @@
 package com.atguigu.spzx.manager;
 
 import com.atguigu.spzx.common.config.EnableKnife4j;
+import com.atguigu.spzx.common.log.annotation.EnableLogAspect;
 import com.atguigu.spzx.manager.properties.UserAuthProperties;
 import io.minio.BucketExistsArgs;
 import io.minio.MakeBucketArgs;
@@ -11,6 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 import java.io.IOException;
@@ -22,6 +24,8 @@ import java.security.NoSuchAlgorithmException;
 @EnableConfigurationProperties
 @EnableKnife4j
 @EnableScheduling
+@EnableLogAspect
+@EnableAsync
 public class ManagerApplication {
 
     public static void main(String[] args) {

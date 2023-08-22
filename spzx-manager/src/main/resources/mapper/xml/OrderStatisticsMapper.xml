@@ -24,10 +24,10 @@
     select * from order_statistics
     where is_deleted=0
     <if test="createTimeBegin!=null and createTimeBegin!=''">
-        and create_time>#{createTimeBegin}
+        and order_date>=#{createTimeBegin}
     </if>
     <if test="createTimeEnd!=null and createTimeEnd!=''">
-        and #{createTimeEnd}>create_time
+        and #{createTimeEnd}>=order_date
     </if>
     </select>
 
